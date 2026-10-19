@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-noto-sans-devanagari: 'Noto Sans Devanagari', sans-serif;
+  --font-rozha: 'Rozha One', serif;
+  --font-cinzel: 'Cinzel', serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #240307;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #9B7829 0%, #D4AF57 50%, #9B7829 100%);
+  border-radius: 5px;
+  border: 2px solid #240307;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F5DE93;
+}
+
+/* Text Selection */
+::selection {
+  background: #8F1018;
+  color: #FFF4DD;
+}
+
+/* Body & Base */
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: #240307;
+  color: #FFF4DD;
+  font-family: var(--font-noto-sans-devanagari), sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Flame animation */
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: scale(1) rotate(-1deg);
+    opacity: 0.96;
+    filter: drop-shadow(0 0 14px rgba(246, 184, 94, 0.95)) drop-shadow(0 0 28px rgba(233, 162, 59, 0.7));
+  }
+  25% {
+    transform: scale(1.06, 0.94) rotate(1.5deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 18px rgba(246, 184, 94, 1)) drop-shadow(0 0 35px rgba(198, 40, 40, 0.7));
+  }
+  50% {
+    transform: scale(0.94, 1.05) rotate(-1deg);
+    opacity: 0.92;
+    filter: drop-shadow(0 0 12px rgba(246, 184, 94, 0.9)) drop-shadow(0 0 24px rgba(233, 162, 59, 0.6));
+  }
+  75% {
+    transform: scale(1.03, 0.97) rotate(0.8deg);
+    opacity: 0.98;
+    filter: drop-shadow(0 0 16px rgba(246, 184, 94, 0.95)) drop-shadow(0 0 30px rgba(198, 40, 40, 0.65));
+  }
+}
+
+.animate-flame {
+  animation: flameFlicker 2.2s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+/* Aarti Circular Motion */
+@keyframes aartiParikrama {
+  0% {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  25% {
+    transform: rotate(90deg) translate(20px, -15px);
+  }
+  50% {
+    transform: rotate(180deg) translate(0, -25px);
+  }
+  75% {
+    transform: rotate(270deg) translate(-20px, -15px);
+  }
+  100% {
+    transform: rotate(360deg) translate(0, 0);
+  }
+}
+
+.animate-aarti {
+  animation: aartiParikrama 7s infinite ease-in-out;
+}
+
+/* Incense Smoke Wave */
+@keyframes smokeWave {
+  0% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-25px) scaleX(1.4) scaleY(1.2) rotate(4deg);
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(-50px) scaleX(2) scaleY(1.5) rotate(-5deg);
+    opacity: 0;
+  }
+}
+
+.animate-smoke {
+  animation: smokeWave 3s infinite ease-out;
+}
+
+/* Subtle Shimmer effect */
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFF9EB 0%, #F5DE93 25%, #D4AF57 50%, #E9A23B 75%, #F5DE93 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 8s linear infinite;
+}
+
+/* Ornate Border Helper */
+.ornate-gold-border {
+  border: 2px solid;
+  border-image: linear-gradient(to right, #9B7829, #F5DE93, #D4AF57, #F5DE93, #9B7829) 1;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-flame,
+  .animate-aarti,
+  .animate-smoke,
+  .gold-gradient-text {
+    animation: none !important;
+  }
+}
+
+/* Print Styles for Greeting Cards */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
